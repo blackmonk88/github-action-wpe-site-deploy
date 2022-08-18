@@ -71,6 +71,13 @@ else
     echo "Skipping PHP Linting."
 fi
 
+# FS modification for npm work and deploy
+echo "Running FS modification to run npm under docker"
+cd "$SRC_PATH"/wp-content/themes
+npm install
+npm run prod
+cd ../..
+
 # post deploy script 
 if [[ -n ${INPUT_SCRIPT} ]]; then 
     SCRIPT="&& sh ${INPUT_SCRIPT}";
